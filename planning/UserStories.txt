@@ -1,4 +1,10 @@
-As a user I would like to add restaurants I like and store them so I can have a saved list of my restaurants.
-As a user I would like to put those restaurants in categories so that it is more organized.
-As a user I would like to select from my restaurants list the restaurants I am in the mood for right now.
-As a user I would like the application to randomly select a restaurant from those I am in the mood for so I don't have to pick.
+MVP
+- As a user I would like to add restaurants I like and store them so I can have a saved list of my restaurants.
+- As a user I would like to put those restaurants in categories so that it is more organized.
+- As a user I would like to select from my restaurants list the restaurants I am in the mood for right now.
+- As a user I would like the application to randomly select a restaurant from those I am in the mood for so I don't have to pick.
+
+Stretch
+- As a user I would like a wheel of fortune like spinner to make picking fun.
+- As a user I would like to login and have my restaurant list saved and personal.
+- As a user I would like to see suggestions of nearby restaurants that I can add to my list.
