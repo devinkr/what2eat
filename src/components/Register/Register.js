@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 function Register({ setShowRegister }) {
 	return (
 		<Form>
-			<p className='mt-4'>Please register an account</p>
+			<p className='mt-4'>Please register your account</p>
 			<InputGroup className='form-outline mb-4'>
 				<Form.Control
 					placeholder='Username'
@@ -39,8 +39,9 @@ function Register({ setShowRegister }) {
 			</div>
 
 			<div className='d-flex align-items-center justify-content-center pb-4'>
+				<p className='mb-0 me-2'>Return to the Login Page?</p>
 				<Button variant='outline-danger' onClick={() => setShowRegister(false)}>
-					Return to Log in
+					Go Back
 				</Button>
 			</div>
 		</Form>

@@ -17,8 +17,8 @@ function Home(props) {
 				<Col className='col-xl-10'>
 					<Card className='rounded-3 text-black'>
 						<Row className='g-0'>
-							<Col className='col-lg-6'>
-								<Card.Body className='p-md-5 mx-md-4'>
+							<Col className='col-12 col-md-6'>
+								<Card.Body>
 									<div className='text-center'>
 										<img
 											src={
@@ -36,8 +36,8 @@ function Home(props) {
 									)}
 								</Card.Body>
 							</Col>
-							<Col className='teal-bg col-lg-6 d-flex align-items-center'>
-								<div className='text-black px-3 py-4 p-md-5 mx-md-4'>
+							<Col className='teal-bg col-12 col-md-6 d-flex align-items-center'>
+								<div className='text-black px-3 py-4'>
 									<h4 className='mb-4'>Can't decide what to eat?</h4>
 									<p>
 										For those nights when you are fighting over whose turn it is
