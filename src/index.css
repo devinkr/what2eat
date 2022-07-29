@@ -10,8 +10,10 @@ body {
 	background-color: var(--dark);
 }
 
-.teal-bg {
-	background-color: var(--primary);
+.about {
+	background-color: var(--light-blue);
+	border-top-right-radius: 0.3rem;
+	border-bottom-right-radius: 0.3rem;
 }
 
 .dark-bg {

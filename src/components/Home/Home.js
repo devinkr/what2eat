@@ -8,17 +8,17 @@ import Card from 'react-bootstrap/Card';
 
 // Login form designs from https://mdbootstrap.com/docs/standard/extended/login/
 
-function Home(props) {
+function Home({ setUserAuth }) {
 	const [showRegister, setShowRegister] = useState(false);
 
 	return (
-		<Container className='dark-bg vw-100 vh-100'>
+		<Container className='dark-bg py-5 h-100'>
 			<Row className='d-flex justify-content-center align-items-center h-100'>
 				<Col className='col-xl-10'>
 					<Card className='rounded-3 text-black'>
 						<Row className='g-0'>
 							<Col className='col-12 col-md-6'>
-								<Card.Body>
+								<Card.Body className='mx-4'>
 									<div className='text-center'>
 										<img
 											src={
@@ -32,16 +32,19 @@ function Home(props) {
 									{showRegister ? (
 										<Register setShowRegister={setShowRegister} />
 									) : (
-										<LogIn setShowRegister={setShowRegister} />
+										<LogIn
+											setShowRegister={setShowRegister}
+											setUserAuth={setUserAuth}
+										/>
 									)}
 								</Card.Body>
 							</Col>
-							<Col className='teal-bg col-12 col-md-6 d-flex align-items-center'>
-								<div className='text-black px-3 py-4'>
+							<Col className='col-12 col-md-6 d-flex align-items-center about'>
+								<div className='text-black mx-4 px-3 py-4'>
 									<h4 className='mb-4'>Can't decide what to eat?</h4>
 									<p>
 										For those nights when you are fighting over whose turn it is
-										to pick what to eat, What2Eat makes it simple.
+										to pick, What2Eat makes it simple.
 									</p>
 									<p>
 										Create categories to group food options and then add
