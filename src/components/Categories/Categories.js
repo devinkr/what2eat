@@ -3,7 +3,7 @@ import { getAPIData, deleteAPIData } from '../../utils/useAxios';
 import { signOut } from '../../utils/useAuth';
 import Restaurants from '../Restaurants/Restaurants';
 import AddCategory from '../AddCategory/AddCategory';
-import AddRestaurant from '../AddRestaurant/AddRestaurant.js';
+import AddRestaurant from '../AddRestaurant/AddRestaurant';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Accordion from 'react-bootstrap/Accordion';
@@ -83,7 +83,6 @@ function Categories({ setUserAuth }) {
 				</Col>
 				<Col md={7}>
 					<AddCategory
-						setError={setError}
 						setUserAuth={setUserAuth}
 						setCategories={setCategories}
 					/>
@@ -118,6 +117,11 @@ function Categories({ setUserAuth }) {
 					))}
 				</Form>
 			</Accordion>
+			<Row className="mt-4">
+				<Col>
+					<AddRestaurant />
+				</Col>
+			</Row>
 		</>
 	);
 }
