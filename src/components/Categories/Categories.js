@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
-import { getAPIData } from '../../utils/useAuth';
+import { getAPIData } from '../../utils/useAxios';
 import { signOut } from '../../utils/useAuth';
 import Restaurants from '../Restaurants/Restaurants';
+import AddCategory from '../AddCategory/AddCategory';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Accordion from 'react-bootstrap/Accordion';
 import Form from 'react-bootstrap/Form';
 
@@ -26,6 +29,7 @@ function Categories({ setUserAuth }) {
 		const response = await getAPIData('restaurants');
 		if (response.status === 200) {
 			makeRestaurantList(response.data);
+			categoryList();
 		} else if (response.status === 401) {
 			setUserAuth(null);
 			signOut();
@@ -48,7 +52,6 @@ function Categories({ setUserAuth }) {
 
 	useEffect(() => {
 		restaurantList();
-		categoryList();
 	}, []);
 
 	if (categories.length <= 0) {
@@ -60,7 +63,18 @@ function Categories({ setUserAuth }) {
 
 	return (
 		<>
-			<h3 className='mb-4'>Categories:</h3>
+			<Row>
+				<Col md={5}>
+					<h3 className='mb-4'>Categories:</h3>
+				</Col>
+				<Col md={7}>
+					<AddCategory
+						setError={setError}
+						setUserAuth={setUserAuth}
+						setCategories={setCategories}
+					/>
+				</Col>
+			</Row>
 			<Accordion defaultActiveKey='0'>
 				<Form>
 					{/* Map over categories and create an accordion for each category */}

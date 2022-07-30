@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LogIn from '../LogIn/LogIn';
 import Register from '../Register/Register';
 import Container from 'react-bootstrap/Container';
@@ -9,6 +9,10 @@ import Card from 'react-bootstrap/Card';
 // Login form designs from https://mdbootstrap.com/docs/standard/extended/login/
 
 function Home({ setUserAuth }) {
+	useEffect(() => {
+		document.body.style.backgroundColor = '#334b49';
+	}, []);
+
 	// When true will show register form
 	// Default to show login form
 	const [showRegister, setShowRegister] = useState(false);
