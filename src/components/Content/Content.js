@@ -3,8 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-
-function Content(props) {
+function Content({ setUserAuth }) {
 	return (
 		<Container className='bg-light mt-3'>
 			<Row>
@@ -17,7 +16,7 @@ function Content(props) {
 					/>
 				</Col>
 				<Col md={6}>
-					<Categories />
+					<Categories setUserAuth={setUserAuth} />
 				</Col>
 			</Row>
 		</Container>

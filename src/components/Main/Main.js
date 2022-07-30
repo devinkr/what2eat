@@ -7,7 +7,7 @@ function Main({ setUserAuth }) {
 	return (
 		<>
 			<Header setUserAuth={setUserAuth} />
-			<Content />
+			<Content setUserAuth={setUserAuth} />
 		</>
 	);
 }

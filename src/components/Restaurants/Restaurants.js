@@ -22,7 +22,7 @@ function Restaurants({ restaurants, selected, setSelected }) {
 			});
 		}
 	}
-	if (restaurants.length > 0) {
+	if (restaurants.length > 0 && selected) {
 		return (
 			<>
         {/* Map over the restaurants and render as a checkbox */}
