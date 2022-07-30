@@ -9,6 +9,8 @@ import Card from 'react-bootstrap/Card';
 // Login form designs from https://mdbootstrap.com/docs/standard/extended/login/
 
 function Home({ setUserAuth }) {
+	// When true will show register form
+	// Default to show login form
 	const [showRegister, setShowRegister] = useState(false);
 
 	return (
