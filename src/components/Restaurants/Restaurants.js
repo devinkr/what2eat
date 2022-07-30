@@ -2,20 +2,19 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 
 function Restaurants({ restaurants, selected, setSelected }) {
-	
-  // Using state to track selected restaurants so when you check a restaurant the same restaurant in another category
-  // will also be checked.
-  function handleSelect(event) {
+	// Using state to track selected restaurants so when you check a restaurant the same restaurant in another category
+	// will also be checked.
+	function handleSelect(event) {
 		const target = event.target;
-		
-    // If checked then set checked to true in state for that restaurant
-    if (target.checked) {
+
+		// If checked then set checked to true in state for that restaurant
+		if (target.checked) {
 			setSelected({
 				...selected,
 				[target.dataset.id]: { name: target.dataset.name, checked: true },
 			});
 		} else {
-      // Set checked to false in state for that restaurant
+			// Set checked to false in state for that restaurant
 			setSelected({
 				...selected,
 				[target.dataset.id]: { name: target.dataset.name, checked: false },
@@ -24,14 +23,14 @@ function Restaurants({ restaurants, selected, setSelected }) {
 	}
 	if (restaurants.length > 0 && selected) {
 		return (
-			<>
-        {/* Map over the restaurants and render as a checkbox */}
+			<div>
+				{/* Map over the restaurants and render as a checkbox */}
 				{restaurants.map((restaurant) => {
 					return (
 						<Form.Check
 							key={`restaurantId-${restaurant.id}`}
-              // Checkboxes are controlled components so one restaurant that is
-              // checked updates the same restaurant in other categories
+							// Checkboxes are controlled components so one restaurant that is
+							// checked updates the same restaurant in other categories
 							checked={selected[restaurant.id].checked}
 							inline
 							type='checkbox'
@@ -43,7 +42,7 @@ function Restaurants({ restaurants, selected, setSelected }) {
 						/>
 					);
 				})}
-			</>
+			</div>
 		);
 	} else {
 		return null;
