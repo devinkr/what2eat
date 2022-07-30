@@ -9,7 +9,11 @@ function App() {
 	}
 	const [userAuth, setUserAuth] = useState(user);
 
-	return userAuth ? <Main /> : <Home setUserAuth={setUserAuth} />;
+	return userAuth ? (
+		<Main setUserAuth={setUserAuth} />
+	) : (
+		<Home setUserAuth={setUserAuth} />
+	);
 }
 
 export default App;

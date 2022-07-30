@@ -19,3 +19,15 @@ body {
 .dark-bg {
 	background-color: var(--dark);
 }
+
+.light-blue-bg {
+	background-color: var(--light-blue);
+}
+
+.form-check-inline {
+	margin: 1rem;
+}
+
+.accordion-button {
+	font-size: 1.5rem;
+}

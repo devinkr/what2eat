@@ -24,3 +24,7 @@ export async function createAccount(username, password, password2) {
 export function saveToken(token) {
 	localStorage.setItem('authToken', JSON.stringify(token));
 }
+
+export function signOut() {
+	localStorage.removeItem('authToken');
+}
