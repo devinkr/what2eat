@@ -57,18 +57,24 @@ function AddRestaurant({ categories, setCategories, setUserAuth }) {
 	if (categories.length > 0) {
 		return (
 			<>
-				<h3>Add a restaurant:</h3>
+				<h4>Add a restaurant / dish</h4>
+				{error && (
+					<div className='alert alert-danger' role='alert'>
+						{error.detail}
+					</div>
+				)}
 				<Form onSubmit={handleSubmit}>
 					<InputGroup className='mb-3'>
 						<Form.Control
-							placeholder='restaurant name'
-							aria-label='restaurant name'
+							placeholder='name'
+							aria-label='restaurant / dish'
 							id='addRestaurant'
 							required
 							onChange={handleChange}
 							value={formState.name}
 						/>
 					</InputGroup>
+					<h5 className='ms-4'>Select categories:</h5>
 					{categories.map((category) => {
 						return (
 							<Form.Check
@@ -83,10 +89,10 @@ function AddRestaurant({ categories, setCategories, setUserAuth }) {
 							/>
 						);
 					})}
-					<div>
-					<Button type='submit' variant='outline-primary'>
-						<i className='bi bi-cup-straw'> Add restaurant</i>
-					</Button>
+					<div className='mt-3 d-flex justify-content-center'>
+						<Button className='mb-4' type='submit' variant='outline-primary'>
+							<i className='bi bi-cup-straw'> Add</i>
+						</Button>
 					</div>
 				</Form>
 			</>

@@ -4,6 +4,7 @@
 	--light-blue: #9ec0ff;
 	--dark-blue: #668bce;
 	--gray: #96b1ad;
+	font-size: 18px;
 }
 
 body {
@@ -30,4 +31,23 @@ body {
 
 .accordion-button {
 	font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 500px) {
+	:root {
+		--wheel-size: 200px;
+		--wheel-slice-spacing: 25px;
+	}
+	.wheel-item {
+		font-size: 0.7rem;
+	}
+	.accordion-button {
+		font-size: 1rem;
+	}
+	h2 {
+		font-size: 1.2rem;
+	}
+	h3 {
+		font-size: 1rem;
+	}
 }
