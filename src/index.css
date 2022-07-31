@@ -4,13 +4,24 @@
 	--light-blue: #9ec0ff;
 	--dark-blue: #668bce;
 	--gray: #96b1ad;
-	font-size: 18px;
+	font-size: 16px;
 }
 
 body {
 	background-color: var(--dark);
 }
 
+h3 {
+	font-size: 1.3rem;
+}
+
+h4 {
+	font-size: 1.2rem;
+}
+
+h5 {
+	font-size: 1.1rem;
+}
 .about {
 	background-color: var(--light-blue);
 	border-top-right-radius: 0.3rem;
@@ -30,24 +41,17 @@ body {
 }
 
 .accordion-button {
-	font-size: 1.5rem;
+	font-size: 1.1rem;
+	font-weight: 500;
 }
 
 @media only screen and (max-width: 500px) {
-	:root {
-		--wheel-size: 200px;
-		--wheel-slice-spacing: 25px;
-	}
-	.wheel-item {
-		font-size: 0.7rem;
-	}
 	.accordion-button {
 		font-size: 1rem;
 	}
-	h2 {
-		font-size: 1.2rem;
-	}
-	h3 {
+	h3,
+	h4,
+	h5 {
 		font-size: 1rem;
 	}
 }

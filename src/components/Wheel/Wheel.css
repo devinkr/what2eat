@@ -1,6 +1,6 @@
 :root {
 	--wheel-font: 'Lato', 'Quicksand', sans-serif;
-	--wheel-size: 400px;
+	--wheel-size: 350px;
 	--wheel-slice-spacing: 50px;
 	--wheel-border-size: 5px;
 	--wheel-color: teal;
@@ -166,11 +166,5 @@
 	}
 	.wheel-item {
 		font-size: 0.7rem;
-	}
-	h2 {
-		font-size: 1.2rem;
-	}
-	h3 {
-		font-size: 1rem;
 	}
 }
