@@ -116,11 +116,11 @@ function Categories({ setUserAuth, selected, setSelected }) {
 							eventKey={`${category.id}`}>
 							<Accordion.Header>{category.title}</Accordion.Header>
 							<Accordion.Body>
-								<div className='d-flex justify-content-end'>
+								<div style={{ float: 'right' }}>
 									<Button
 										variant='outline-danger'
 										onClick={() => handleDelete(category.id)}>
-										<i className='bi bi-trash'>Delete Category</i>
+										<i className='bi bi-trash'></i>
 									</Button>
 								</div>
 
