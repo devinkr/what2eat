@@ -2,25 +2,28 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 
 function Restaurants({ restaurants, selected, setSelected }) {
+	function isSelected(id) {
+		if (selected.hasOwnProperty(id)) return true;
+		return false;
+	}
+
 	// Using state to track selected restaurants so when you check a restaurant the same restaurant in another category
 	// will also be checked.
 	function handleSelect(event) {
 		const target = event.target;
 
-		// If checked then set checked to true in state for that restaurant
-		if (target.checked) {
-			setSelected({
-				...selected,
-				[target.dataset.id]: { name: target.dataset.name, checked: true },
-			});
+		if (isSelected(target.dataset.id)) {
+			const selectedCopy = { ...selected };
+			delete selectedCopy[target.dataset.id];
+			setSelected(selectedCopy);
 		} else {
-			// Set checked to false in state for that restaurant
 			setSelected({
 				...selected,
-				[target.dataset.id]: { name: target.dataset.name, checked: false },
+				[target.dataset.id]: { name: target.dataset.name },
 			});
 		}
 	}
+
 	if (restaurants.length > 0 && selected) {
 		return (
 			<div>
@@ -31,7 +34,7 @@ function Restaurants({ restaurants, selected, setSelected }) {
 							key={`restaurantId-${restaurant.id}`}
 							// Checkboxes are controlled components so one restaurant that is
 							// checked updates the same restaurant in other categories
-							checked={selected[restaurant.id].checked}
+							checked={isSelected(restaurant.id)}
 							inline
 							type='checkbox'
 							id={`restaurantId-${restaurant.id}`}

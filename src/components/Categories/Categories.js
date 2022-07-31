@@ -12,33 +12,9 @@ import Button from 'react-bootstrap/Button';
 
 function Categories({ setUserAuth }) {
 	// State to track selected restaurants
-	const [selected, setSelected] = useState(null);
+	const [selected, setSelected] = useState({});
 	const [categories, setCategories] = useState([]);
 	const [error, setError] = useState(null);
-
-	function makeRestaurantList(restaurants) {
-		const initialSelected = {};
-		restaurants.forEach((restaurant) => {
-			initialSelected[restaurant.id] = {
-				name: restaurant.name,
-				checked: false,
-			};
-		});
-		setSelected(initialSelected);
-	}
-
-	async function restaurantList() {
-		const response = await getAPIData('restaurants');
-		if (response.status === 200) {
-			makeRestaurantList(response.data);
-			categoryList();
-		} else if (response.status === 401) {
-			setUserAuth(null);
-			signOut();
-		} else {
-			setError({ status: response.status, detail: response.detail });
-		}
-	}
 
 	async function categoryList() {
 		const response = await getAPIData('categories');
@@ -52,6 +28,10 @@ function Categories({ setUserAuth }) {
 		}
 	}
 
+	useEffect(() => {
+		categoryList();
+	}, []);
+
 	async function handleDelete(id) {
 		const response = await deleteAPIData(`categories/${id}`);
 		if (response.status === 204) {
@@ -63,10 +43,6 @@ function Categories({ setUserAuth }) {
 			setError({ status: response.status, detail: response.detail });
 		}
 	}
-
-	useEffect(() => {
-		restaurantList();
-	}, []);
 
 	if (categories.length <= 0) {
 		return null;
@@ -91,7 +67,7 @@ function Categories({ setUserAuth }) {
 			<Accordion>
 				<Form>
 					{/* Map over categories and create an accordion for each category */}
-					{categories.map((category, index) => (
+					{categories.map((category) => (
 						<Accordion.Item
 							key={`categoryId-${category.id}`}
 							eventKey={`${category.id}`}>
@@ -117,9 +93,13 @@ function Categories({ setUserAuth }) {
 					))}
 				</Form>
 			</Accordion>
-			<Row className="mt-4">
+			<Row className='mt-4'>
 				<Col>
-					<AddRestaurant />
+					<AddRestaurant
+						setUserAuth={setUserAuth}
+						categories={categories}
+						setCategories={setCategories}
+					/>
 				</Col>
 			</Row>
 		</>
