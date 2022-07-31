@@ -28,4 +28,5 @@ When its time to decide you check whichever restaurants / dishes you are in the 
   - Python
   - Django
   - Django REST Framework 
+  - PostgreSQL
   - JWT Auth
