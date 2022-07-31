@@ -10,35 +10,9 @@ import Accordion from 'react-bootstrap/Accordion';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-function Categories({ setUserAuth }) {
-	// State to track selected restaurants
-	const [selected, setSelected] = useState(null);
+function Categories({ setUserAuth, selected, setSelected }) {
 	const [categories, setCategories] = useState([]);
 	const [error, setError] = useState(null);
-
-	function makeRestaurantList(restaurants) {
-		const initialSelected = {};
-		restaurants.forEach((restaurant) => {
-			initialSelected[restaurant.id] = {
-				name: restaurant.name,
-				checked: false,
-			};
-		});
-		setSelected(initialSelected);
-	}
-
-	async function restaurantList() {
-		const response = await getAPIData('restaurants');
-		if (response.status === 200) {
-			makeRestaurantList(response.data);
-			categoryList();
-		} else if (response.status === 401) {
-			setUserAuth(null);
-			signOut();
-		} else {
-			setError({ status: response.status, detail: response.detail });
-		}
-	}
 
 	async function categoryList() {
 		const response = await getAPIData('categories');
@@ -52,6 +26,10 @@ function Categories({ setUserAuth }) {
 		}
 	}
 
+	useEffect(() => {
+		categoryList();
+	}, []);
+
 	async function handleDelete(id) {
 		const response = await deleteAPIData(`categories/${id}`);
 		if (response.status === 204) {
@@ -64,19 +42,60 @@ function Categories({ setUserAuth }) {
 		}
 	}
 
-	useEffect(() => {
-		restaurantList();
-	}, []);
-
 	if (categories.length <= 0) {
-		return null;
-	}
-	if (error) {
-		return <div>Something went wrong, please try again later.</div>;
+		return (
+			<>
+				<Row>
+					<Col md={5}>
+						<h3 className='mb-4'>Categories:</h3>
+					</Col>
+					<Col md={7}>
+						<AddCategory
+							setUserAuth={setUserAuth}
+							setCategories={setCategories}
+						/>
+					</Col>
+				</Row>
+				<Row>
+					<Col className='px-5 mt-4'>
+						<h4>Welcome!</h4>
+						<p>
+							To get started add a category above. Categories can be things like{' '}
+							<strong>Fast Food</strong>, <strong>Mexican</strong>,{' '}
+							<strong>Cheap</strong>, <strong>Take Out</strong>,{' '}
+							<strong>Sit Down</strong>, etc.{' '}
+						</p>
+						<p>
+							The category could even be something like{' '}
+							<strong>Cook At Home</strong> where you list dishes you like to
+							cook.
+						</p>
+						<p>
+							Once you have added at least one category, you will be able to add
+							choices.
+						</p>
+						<p>
+							The same choice can be in more than one category. EG:{' '}
+							<strong>Taco Bell</strong> could be listed in{' '}
+							<strong>Fast Food</strong>, <strong>Cheap</strong>, and{' '}
+							<strong>Mexican</strong> (That last category is controversial).
+						</p>
+						<p>
+							Add a category and let <strong>WHERE2EAT</strong> decide for you.
+						</p>
+					</Col>
+				</Row>
+			</>
+		);
 	}
 
 	return (
 		<>
+			{error && (
+				<div className='alert alert-danger' role='alert'>
+					{error.detail}
+				</div>
+			)}
 			<Row>
 				<Col md={5}>
 					<h3 className='mb-4'>Categories:</h3>
@@ -91,7 +110,7 @@ function Categories({ setUserAuth }) {
 			<Accordion>
 				<Form>
 					{/* Map over categories and create an accordion for each category */}
-					{categories.map((category, index) => (
+					{categories.map((category) => (
 						<Accordion.Item
 							key={`categoryId-${category.id}`}
 							eventKey={`${category.id}`}>
@@ -117,9 +136,13 @@ function Categories({ setUserAuth }) {
 					))}
 				</Form>
 			</Accordion>
-			<Row className="mt-4">
+			<Row className='mt-4'>
 				<Col>
-					<AddRestaurant />
+					<AddRestaurant
+						setUserAuth={setUserAuth}
+						categories={categories}
+						setCategories={setCategories}
+					/>
 				</Col>
 			</Row>
 		</>
