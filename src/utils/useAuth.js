@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { config } from './constants';
-const API_URL = config.API_URL;
+export const API_URL = config.API_URL;
 
 export async function getToken(username, password) {
 	const url = `${API_URL}/token/`;
