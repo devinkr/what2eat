@@ -53,13 +53,22 @@ function Home({ setUserAuth }) {
 										to pick, What2Eat makes it simple.
 									</p>
 									<p>
-										Create categories to group food options and then add
-										restaurants/meals to those categories. Highlight the ones
-										you are in the mood for today and let What2Eat decide.
-									</p>
-									<p>
 										What2Eat can pick a restaurant for you, or choose what dish
 										you should cook. The possibilities are limitless.
+									</p>
+									<p>
+										Create categories to group food options and then add
+										restaurants / items to those categories. Select the ones you
+										are in the mood for today and spin the wheel of fate.
+									</p>
+									<p>
+										If you don't want to create your own account use the guest
+										login.
+									</p>
+									<p>
+										Username: guest
+										<br />
+										Password: guestpass
 									</p>
 								</div>
 							</Col>
