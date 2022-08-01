@@ -16,6 +16,7 @@ When its time to decide you check whichever restaurants / dishes you are in the 
 ## Technologies
 ### Front End
   - React
+  - Jest and React Testing Library
   - Axios
   - React-Bootstrap
   - JWT Auth
