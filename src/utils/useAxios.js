@@ -23,6 +23,8 @@ export async function getAPIData(endpoint) {
 			} else {
 				return refresh;
 			}
+		} else {
+			return error.response;
 		}
 	}
 }
@@ -46,6 +48,8 @@ export async function postAPIData(endpoint, data) {
 			} else {
 				return refresh;
 			}
+		} else {
+			return error.response;
 		}
 	}
 }
@@ -69,6 +73,8 @@ export async function deleteAPIData(endpoint) {
 			} else {
 				return refresh;
 			}
+		} else {
+			return error.response;
 		}
 	}
 }
