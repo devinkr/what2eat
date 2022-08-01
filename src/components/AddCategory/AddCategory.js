@@ -28,11 +28,10 @@ function AddCategory({ setUserAuth, setCategories }) {
 		if (response.status === 201) {
 			categoryList();
 		} else if (response.status === 401) {
-			console.log('I got to this part');
 			setUserAuth(null);
 			signOut();
 		} else {
-			setError({ status: response.status, detail: response.detail });
+			setError(true);
 		}
 	}
 
