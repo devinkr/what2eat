@@ -3,6 +3,7 @@ import { createAccount } from '../../utils/useAuth';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 // Login form designs from https://mdbootstrap.com/docs/standard/extended/login/
 
@@ -10,16 +11,19 @@ function Register({ setShowRegister }) {
 	const blankFormState = { username: '', password: '', password2: '' };
 	const [formState, setFormState] = useState(blankFormState);
 	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 		setFormState(blankFormState);
+		setLoading(true);
 
 		const response = await createAccount(
 			formState.username,
 			formState.password,
 			formState.password2
 		);
+		setLoading(false);
 		if (response.status === 201) {
 			setError(null);
 			setShowRegister(false);
@@ -103,13 +107,30 @@ function Register({ setShowRegister }) {
 			)}
 
 			<div className='text-center pt-1 mb-5 pb-1'>
-				<Button
-					type='submit'
-					variant='primary'
-					className='btn-block mb-3'
-					disabled={error?.status === 'noMatch'}>
-					Register
-				</Button>
+				{loading ? (
+					<Button
+						type='submit'
+						variant='primary'
+						className='btn-block mb-3'
+						disabled>
+						<Spinner
+							as='span'
+							animation='border'
+							size='sm'
+							role='status'
+							aria-hidden='true'
+						/>
+						Loading...
+					</Button>
+				) : (
+					<Button
+						type='submit'
+						variant='primary'
+						className='btn-block mb-3'
+						disabled={error?.status === 'noMatch'}>
+						Register
+					</Button>
+				)}
 			</div>
 
 			<div className='d-flex align-items-center justify-content-center pb-4'>
