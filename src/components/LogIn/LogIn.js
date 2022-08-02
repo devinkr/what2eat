@@ -3,6 +3,7 @@ import { getToken, saveToken } from '../../utils/useAuth';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 // Login form designs from https://mdbootstrap.com/docs/standard/extended/login/
 
@@ -10,13 +11,16 @@ function LogIn({ setShowRegister, setUserAuth }) {
 	const blankFormState = { username: '', password: '' };
 	const [formState, setFormState] = useState(blankFormState);
 	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 		setFormState(blankFormState);
+		setLoading(true);
 
 		// Get Auth Token
 		const response = await getToken(formState.username, formState.password);
+		setLoading(false);
 		if (response.status === 200) {
 			setError(null);
 			setUserAuth(response.data);
@@ -67,11 +71,27 @@ function LogIn({ setShowRegister, setUserAuth }) {
 					{error.detail}
 				</div>
 			)}
-
 			<div className='text-center pt-1 mb-5 pb-1'>
-				<Button type='submit' variant='primary' className='btn-block mb-3'>
-					Log in
-				</Button>
+				{loading ? (
+					<Button
+						type='submit'
+						variant='primary'
+						className='btn-block mb-3'
+						disabled>
+						<Spinner
+							as='span'
+							animation='border'
+							size='sm'
+							role='status'
+							aria-hidden='true'
+						/>
+						Loading...
+					</Button>
+				) : (
+					<Button type='submit' variant='primary' className='btn-block mb-3'>
+						Log in
+					</Button>
+				)}
 			</div>
 
 			<div className='d-flex align-items-center justify-content-center pb-4'>

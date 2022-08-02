@@ -4,14 +4,17 @@ import { signOut } from '../../utils/useAuth';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Spinner from 'react-bootstrap/Spinner';
 
 function AddRestaurant({ categories, setCategories, setUserAuth }) {
 	const initialFormState = { name: '', categories: [] };
 	const [formState, setFormState] = useState(initialFormState);
 	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
 
 	async function categoryList() {
 		const response = await getAPIData('categories');
+		setLoading(false);
 		if (response.status === 200) {
 			setCategories(response.data);
 		} else if (response.status === 401) {
@@ -42,19 +45,22 @@ function AddRestaurant({ categories, setCategories, setUserAuth }) {
 
 	async function handleSubmit(event) {
 		event.preventDefault();
+		setLoading(true);
 		const response = await postAPIData('restaurants', formState);
 		setFormState(initialFormState);
 		if (response.status === 201) {
 			categoryList();
 		} else if (response.status === 401) {
+			setLoading(false);
 			setUserAuth(null);
 			signOut();
 		} else {
+			setLoading(false);
 			setError({ status: response.status, detail: response.detail });
 		}
 	}
 
-	if (categories.length > 0) {
+	if (categories && categories.length > 0) {
 		return (
 			<>
 				<h4>Add a restaurant / dish</h4>
@@ -90,14 +96,28 @@ function AddRestaurant({ categories, setCategories, setUserAuth }) {
 						);
 					})}
 					<div className='mt-3 d-flex justify-content-center'>
-						<Button className='mb-4' type='submit' variant='outline-primary'>
-							<i className='bi bi-cup-straw'> Add</i>
-						</Button>
+						{loading ? (
+							<Button variant='outline-primary' disabled>
+								<Spinner
+									as='span'
+									animation='border'
+									size='sm'
+									role='status'
+									aria-hidden='true'
+								/>{' '}
+								Loading...
+							</Button>
+						) : (
+							<Button className='mb-4' type='submit' variant='outline-primary'>
+								<i className='bi bi-cup-straw'> Add</i>
+							</Button>
+						)}
 					</div>
 				</Form>
 			</>
 		);
 	}
+	return null;
 }
 
 export default AddRestaurant;

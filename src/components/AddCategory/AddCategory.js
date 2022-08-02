@@ -4,13 +4,16 @@ import { signOut } from '../../utils/useAuth';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
 
 function AddCategory({ setUserAuth, setCategories }) {
 	const [formState, setFormState] = useState('');
 	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
 
 	async function categoryList() {
 		const response = await getAPIData('categories');
+		setLoading(false);
 		if (response.status === 200) {
 			setCategories(response.data);
 		} else if (response.status === 401) {
@@ -23,14 +26,17 @@ function AddCategory({ setUserAuth, setCategories }) {
 
 	async function handleSubmit(event) {
 		event.preventDefault();
+		setLoading(true);
 		const response = await postAPIData('categories', { title: formState });
 		setFormState('');
 		if (response.status === 201) {
 			categoryList();
 		} else if (response.status === 401) {
+			setLoading(false);
 			setUserAuth(null);
 			signOut();
 		} else {
+			setLoading(false);
 			setError(true);
 		}
 	}
@@ -51,9 +57,22 @@ function AddCategory({ setUserAuth, setCategories }) {
 					onChange={handleChange}
 					value={formState}
 				/>
-				<Button type='submit' variant='primary'>
-					Add
-				</Button>
+				{loading ? (
+					<Button variant='primary' disabled>
+						<Spinner
+							as='span'
+							animation='border'
+							size='sm'
+							role='status'
+							aria-hidden='true'
+						/>{' '}
+						Loading...
+					</Button>
+				) : (
+					<Button type='submit' variant='primary'>
+						Add
+					</Button>
+				)}
 				{error && (
 					<div className='invalid-feedback'>
 						Something went wrong. Try again later.

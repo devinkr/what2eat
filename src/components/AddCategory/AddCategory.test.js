@@ -5,7 +5,7 @@ import AddCategory from './AddCategory';
 jest.mock('axios');
 
 function fillFormAndSubmit(screen, title) {
-	const addCategoryEl = screen.getByRole('button', /add/i);
+	const addCategoryEl = screen.getByRole('button', {name :/add/i });
 	const inputEl = screen.getByLabelText('add category');
 	fireEvent.change(inputEl, { target: { value: title } });
 	fireEvent.click(addCategoryEl);
@@ -19,7 +19,7 @@ test('should show add category form', () => {
 });
 
 describe('If API error', () => {
-	test('should show error message and add class is-invalid', async () => {
+	test('should show error message and add class is-invalid to input', async () => {
 		render(<AddCategory />);
 		const error = {
 			response: {
