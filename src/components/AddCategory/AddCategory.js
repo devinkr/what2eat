@@ -11,6 +11,8 @@ function AddCategory({ setUserAuth, setCategories }) {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
 
+	
+	// Refresh the category list from API
 	async function categoryList() {
 		const response = await getAPIData('categories');
 		setLoading(false);
@@ -24,6 +26,9 @@ function AddCategory({ setUserAuth, setCategories }) {
 		}
 	}
 
+	// Post new category to API. If successful refresh the category list
+	// If unauthorized take to login screen
+	// Otherwise display error
 	async function handleSubmit(event) {
 		event.preventDefault();
 		setLoading(true);

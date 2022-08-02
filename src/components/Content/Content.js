@@ -4,10 +4,10 @@ import Categories from '../Categories/Categories';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Spinner from 'react-bootstrap/Spinner';
 
 function Content({ setUserAuth }) {
-	// State to track selected restaurants
+	// State to track which restaurants are selected.
+	// Selected state is at this level so that Wheel can also access it.
 	const [selected, setSelected] = useState({});
 
 	return (

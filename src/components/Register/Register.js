@@ -30,7 +30,6 @@ function Register({ setShowRegister }) {
 		} else if (response.status === 400) {
 			setError({ status: response.status, detail: response.data });
 		} else {
-			console.log('other error');
 			setError({
 				status: 'other',
 				detail: 'Something went wrong. Please try again later.',

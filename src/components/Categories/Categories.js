@@ -15,6 +15,7 @@ function Categories({ setUserAuth, selected, setSelected }) {
 	const [categories, setCategories] = useState([]);
 	const [error, setError] = useState(null);
 
+// Update categories list from API
 	async function categoryList() {
 		const response = await getAPIData('categories');
 		if (response.status === 200) {
@@ -27,10 +28,13 @@ function Categories({ setUserAuth, selected, setSelected }) {
 		}
 	}
 
+	// On first mount get list of categories and save to state
 	useEffect(() => {
 		categoryList();
 	}, []);
 
+
+	// DELETE category and then request categories list from API
 	async function handleCategoryDelete(id) {
 		const response = await deleteAPIData(`categories/${id}`);
 		if (response.status === 204) {
@@ -43,6 +47,7 @@ function Categories({ setUserAuth, selected, setSelected }) {
 		}
 	}
 
+	// If categories list is empty then show Welcome message with instructions.
 	if (categories.length <= 0) {
 		return (
 			<>

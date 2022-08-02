@@ -2,16 +2,19 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 
 function Restaurants({ restaurants, selected, setSelected }) {
+
+	// function to test if a restaurant id is selected. Used in handleSelect and also controlled checkbox components
 	function isSelected(id) {
 		if (selected.hasOwnProperty(id)) return true;
 		return false;
 	}
 
-	// Using state to track selected restaurants so when you check a restaurant the same restaurant in another category
-	// will also be checked.
+	// Using state to track selected restaurants so when you check a restaurant
+	// the same restaurant in another category will also be checked.
 	function handleSelect(event) {
 		const target = event.target;
 
+		
 		if (isSelected(target.dataset.id)) {
 			const selectedCopy = { ...selected };
 			delete selectedCopy[target.dataset.id];
@@ -32,8 +35,8 @@ function Restaurants({ restaurants, selected, setSelected }) {
 					return (
 						<Form.Check
 							key={`restaurantId-${restaurant.id}`}
-							// Checkboxes are controlled components so one restaurant that is
-							// checked updates the same restaurant in other categories
+							// Checkboxes are controlled components so when one restaurant is
+							// checked it updates the same restaurant in other categories
 							checked={isSelected(restaurant.id)}
 							inline
 							type='checkbox'
