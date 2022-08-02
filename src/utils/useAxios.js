@@ -4,6 +4,8 @@ import { getAuthHeader } from './useAuth';
 import { refreshToken } from './useAuth';
 export const API_URL = config.API_URL;
 
+// GET request to specified endpoint
+// If access token is not valid will try to refresh token and then repeat request
 export async function getAPIData(endpoint) {
 	try {
 		const response = await axios.get(`${API_URL}/${endpoint}/`, {
@@ -11,8 +13,6 @@ export async function getAPIData(endpoint) {
 		});
 		if (response.status === 200) {
 			return response;
-		} else {
-			return { status: 9000, detail: response };
 		}
 	} catch (error) {
 		if (
@@ -31,6 +31,8 @@ export async function getAPIData(endpoint) {
 	}
 }
 
+// POST request to specified endpoint with specified data
+// If access token is not valid will try to refresh token and then repeat request
 export async function postAPIData(endpoint, data) {
 	try {
 		const response = await axios.post(`${API_URL}/${endpoint}/`, data, {
@@ -56,6 +58,8 @@ export async function postAPIData(endpoint, data) {
 	}
 }
 
+// DELETE request to specified endpoint
+// If access token is not valid will try to refresh token and then repeat request
 export async function deleteAPIData(endpoint) {
 	try {
 		const response = await axios.delete(`${API_URL}/${endpoint}/`, {

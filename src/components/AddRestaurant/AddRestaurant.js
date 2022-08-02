@@ -12,6 +12,7 @@ function AddRestaurant({ categories, setCategories, setUserAuth }) {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
 
+// Refresh category List from API
 	async function categoryList() {
 		const response = await getAPIData('categories');
 		setLoading(false);
@@ -29,13 +30,16 @@ function AddRestaurant({ categories, setCategories, setUserAuth }) {
 		setFormState({ ...formState, name: event.target.value });
 	}
 
+	// Update state of selected categories to add restaurant to.
 	function handleSelect(event) {
 		const id = Number(event.target.dataset.id);
+		// When unchecked remove it from the list of categories
 		if (formState.categories.includes(id)) {
 			const updatedCategories = formState.categories.filter(
 				(element) => element !== id
 			);
 			setFormState({ ...formState, categories: updatedCategories });
+		// when checked add it to list of categories.
 		} else {
 			const updatedCategories = formState.categories;
 			updatedCategories.push(id);
@@ -43,6 +47,9 @@ function AddRestaurant({ categories, setCategories, setUserAuth }) {
 		}
 	}
 
+	// POST to API to add restaurant. On success update category state.
+	// If unauthorized sign out and return to login page
+	// Otherwise display error
 	async function handleSubmit(event) {
 		event.preventDefault();
 		setLoading(true);
@@ -60,6 +67,7 @@ function AddRestaurant({ categories, setCategories, setUserAuth }) {
 		}
 	}
 
+	// Only render if there are categories
 	if (categories && categories.length > 0) {
 		return (
 			<>

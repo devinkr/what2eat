@@ -1,3 +1,4 @@
+// Use localhost for development and heroku when deployed
 const prod = {
 	API_URL: 'https://where2eatapi.herokuapp.com/api',
 };

@@ -1,4 +1,4 @@
-// https://codesandbox.io/s/github/hadriengerard/spinning-wheel-game-react
+// Found at https://codesandbox.io/s/github/hadriengerard/spinning-wheel-game-react
 import React from 'react';
 
 import './Wheel.css';

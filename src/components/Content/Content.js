@@ -6,7 +6,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 function Content({ setUserAuth }) {
-	// State to track selected restaurants
+	// State to track which restaurants are selected.
+	// Selected state is at this level so that Wheel can also access it.
 	const [selected, setSelected] = useState({});
 
 	return (

@@ -18,7 +18,7 @@ function LogIn({ setShowRegister, setUserAuth }) {
 		setFormState(blankFormState);
 		setLoading(true);
 
-		// Get Auth Token
+		// Get Auth Token. On success set state with token and save to local storage otherwise display error.
 		const response = await getToken(formState.username, formState.password);
 		setLoading(false);
 		if (response.status === 200) {
