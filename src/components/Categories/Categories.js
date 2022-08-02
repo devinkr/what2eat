@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getAPIData, deleteAPIData } from '../../utils/useAxios';
 import { signOut } from '../../utils/useAuth';
+import Welcome from '../Welcome/Welcome';
 import Restaurants from '../Restaurants/Restaurants';
 import AddCategory from '../AddCategory/AddCategory';
 import AddRestaurant from '../AddRestaurant/AddRestaurant';
@@ -22,7 +23,7 @@ function Categories({ setUserAuth, selected, setSelected }) {
 			setUserAuth(null);
 			signOut();
 		} else {
-			setError({ status: response.status, detail: response.detail });
+			setError(true);
 		}
 	}
 
@@ -30,7 +31,7 @@ function Categories({ setUserAuth, selected, setSelected }) {
 		categoryList();
 	}, []);
 
-	async function handleDelete(id) {
+	async function handleCategoryDelete(id) {
 		const response = await deleteAPIData(`categories/${id}`);
 		if (response.status === 204) {
 			categoryList();
@@ -38,7 +39,7 @@ function Categories({ setUserAuth, selected, setSelected }) {
 			setUserAuth(null);
 			signOut();
 		} else {
-			setError({ status: response.status, detail: response.detail });
+			setError(true);
 		}
 	}
 
@@ -57,33 +58,8 @@ function Categories({ setUserAuth, selected, setSelected }) {
 					</Col>
 				</Row>
 				<Row>
-					<Col className='px-5 mt-4'>
-						<h4>Welcome!</h4>
-						<p>
-							To get started add a category above. Categories can be things like{' '}
-							<strong>Fast Food</strong>, <strong>Mexican</strong>,{' '}
-							<strong>Cheap</strong>, <strong>Take Out</strong>,{' '}
-							<strong>Sit Down</strong>, etc.{' '}
-						</p>
-						<p>
-							The category could even be something like{' '}
-							<strong>Cook At Home</strong> where you list dishes you like to
-							cook.
-						</p>
-						<p>
-							Once you have added at least one category, you will be able to add
-							choices.
-						</p>
-						<p>
-							The same choice can be in more than one category. EG:{' '}
-							<strong>Taco Bell</strong> could be listed in{' '}
-							<strong>Fast Food</strong>, <strong>Cheap</strong>, and{' '}
-							<strong>Mexican</strong> (That last category is controversial).
-						</p>
-						<p>
-							Add a category and let <strong>WHERE2EAT</strong> decide for you.
-						</p>
-					</Col>
+					<Col className='px-5 mt-4'></Col>
+					<Welcome />
 				</Row>
 			</>
 		);
@@ -93,7 +69,7 @@ function Categories({ setUserAuth, selected, setSelected }) {
 		<>
 			{error && (
 				<div className='alert alert-danger' role='alert'>
-					{error.detail}
+					Something went wrong. Try again later.
 				</div>
 			)}
 			<Row>
@@ -116,13 +92,11 @@ function Categories({ setUserAuth, selected, setSelected }) {
 							eventKey={`${category.id}`}>
 							<Accordion.Header>{category.title}</Accordion.Header>
 							<Accordion.Body>
-								<div style={{ float: 'right' }}>
-									<Button
-										variant='outline-danger'
-										onClick={() => handleDelete(category.id)}>
-										<i className='bi bi-trash'></i>
-									</Button>
-								</div>
+								<Button
+									variant='outline-danger'
+									onClick={() => handleCategoryDelete(category.id)}>
+									<i className='bi bi-trash'>Delete Category</i>
+								</Button>
 
 								{/* Render list of restaurants for the category */}
 								<Restaurants

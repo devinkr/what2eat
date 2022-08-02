@@ -54,7 +54,7 @@ function AddRestaurant({ categories, setCategories, setUserAuth }) {
 		}
 	}
 
-	if (categories.length > 0) {
+	if (categories && categories.length > 0) {
 		return (
 			<>
 				<h4>Add a restaurant / dish</h4>
@@ -98,6 +98,7 @@ function AddRestaurant({ categories, setCategories, setUserAuth }) {
 			</>
 		);
 	}
+	return null;
 }
 
 export default AddRestaurant;

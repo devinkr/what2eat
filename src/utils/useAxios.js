@@ -2,7 +2,7 @@ import axios from 'axios';
 import { config } from './constants';
 import { getAuthHeader } from './useAuth';
 import { refreshToken } from './useAuth';
-const API_URL = config.API_URL;
+export const API_URL = config.API_URL;
 
 export async function getAPIData(endpoint) {
 	try {
@@ -11,6 +11,8 @@ export async function getAPIData(endpoint) {
 		});
 		if (response.status === 200) {
 			return response;
+		} else {
+			return { status: 9000, detail: response };
 		}
 	} catch (error) {
 		if (
