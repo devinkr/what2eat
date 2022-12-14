@@ -1,6 +1,6 @@
 // Use localhost for development and heroku when deployed
 const prod = {
-	API_URL: 'https://where2eatapi.herokuapp.com/api',
+	API_URL: 'https://devinkr.pythonanywhere.com/api',
 };
 
 const dev = {
