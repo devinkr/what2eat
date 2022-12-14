@@ -85,10 +85,13 @@ function LogIn({ setShowRegister, setUserAuth }) {
 							role='status'
 							aria-hidden='true'
 						/>
-						Loading...
+						&nbsp;Loading...
 					</Button>
 				) : (
-					<Button type='submit' variant='primary' className='btn-block mb-3'>
+					<Button
+						type='submit'
+						variant='primary'
+						className='btn-block mb-3'>
 						Log in
 					</Button>
 				)}
