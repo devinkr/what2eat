@@ -16,6 +16,7 @@ When its time to decide you check whichever restaurants / dishes you are in the 
 ## Technologies
 ### Front End
   - React
+  - Jest and React Testing Library
   - Axios
   - React-Bootstrap
   - JWT Auth
@@ -24,9 +25,10 @@ When its time to decide you check whichever restaurants / dishes you are in the 
   - HTML
   - CSS
   
-### Back End
+### Back End https://github.com/devinkr/what2eat-backend
   - Python
   - Django
   - Django REST Framework 
+  - Simple-JWT
   - PostgreSQL
-  - JWT Auth
+
